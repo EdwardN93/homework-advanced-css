@@ -39,7 +39,6 @@ a {
 }
 p {
   font-size: 1.5rem;
-  text-align: center;
   line-height: 1.6;
 }
 
@@ -259,7 +258,6 @@ form {
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
-
   flex-direction: column;
   /* font-size: 2.5rem; */
   width: 20vw;
