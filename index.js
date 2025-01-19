@@ -44,7 +44,6 @@ const pizzaData = [
     soldOut: false,
   },
 ];
-console.log(pizzaData);
 
 const menu = document.querySelector(".pizzas");
 
