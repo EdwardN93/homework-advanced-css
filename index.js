@@ -61,3 +61,4 @@ pizzaData.forEach((el) => {
   `;
   menu.insertAdjacentHTML("beforeend", html);
 });
+console.log(window.outerHeight);
