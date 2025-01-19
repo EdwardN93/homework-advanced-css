@@ -45,19 +45,47 @@ const pizzaData = [
   },
 ];
 
-const menu = document.querySelector(".pizzas");
-
-pizzaData.forEach((el) => {
-  const html = `
-    <li class="pizza ${el.soldOut ? "sold-out" : ""}">
-            <img src="${el.photoName}" alt="${el.photoName}" />
-            <div>
-              <h3>${el.name}</h3>
-              <p>${el.ingredients}</p>
-              <span>${el.soldOut ? "SOLD OUT" : el.price + "€"}</span>
-            </div>
-    </li>
-
-  `;
-  menu.insertAdjacentHTML("beforeend", html);
+window.addEventListener("load", function () {
+  loadPizzas();
+  setOpenOrClose();
 });
+
+function loadPizzas() {
+  const menu = document.querySelector(".pizzas");
+
+  pizzaData.forEach((el) => {
+    const html = `
+        <li class="pizza ${el.soldOut ? "sold-out" : ""}">
+        <img src="${el.photoName}" alt="${el.photoName}" />
+        <div>
+        <h3>${el.name}</h3>
+        <p>${el.ingredients}</p>
+        <span>${el.soldOut ? "SOLD OUT" : el.price + "€"}</span>
+        </div>
+        </li>
+        
+        `;
+    menu.insertAdjacentHTML("beforeend", html);
+  });
+}
+
+function setOpenOrClose() {
+  const order = document.querySelector(".order");
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+
+  const setOpenMessage = `
+    <p>We're open from 12:00 to 22:00. Come visit us or order online</p>
+    <button class="btn">Order</button>`;
+
+  const setClosedMessage = `
+    <p>
+    We're happy to welcome you and take your order     between ${openHour}:00 and ${closeHour}:00
+    </p>`;
+
+  isOpen
+    ? order.insertAdjacentHTML("beforeend", setOpenMessage)
+    : order.insertAdjacentHTML("beforeend", setClosedMessage);
+}
