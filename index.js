@@ -40,7 +40,7 @@ const pizzaData = [
     name: "Pizza Prosciutto",
     ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
     price: 18,
-    photoName: "/pizzas/prosciutto.jpg",
+    photoName: "pizzas/prosciutto.jpg",
     soldOut: false,
   },
 ];
@@ -82,7 +82,7 @@ function setOpenOrClose() {
 
   const setClosedMessage = `
     <p>
-    We're happy to welcome you and take your order     between ${openHour}:00 and ${closeHour}:00
+    We're happy to welcome you and take your order between ${openHour}:00 and ${closeHour}:00
     </p>`;
 
   isOpen

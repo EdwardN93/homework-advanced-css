@@ -87,6 +87,10 @@ a {
   align-items: center;
 }
 
+.links li:hover {
+  background-color: #e9bb24;
+}
+
 .top {
   align-self: stretch;
   text-align: center;
@@ -275,5 +279,32 @@ form {
 @media only screen and (max-width: 600px) {
   .pizzas {
     grid-template-columns: 1fr;
+  }
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+  }
+  .logo {
+    margin: 0;
+  }
+  .links {
+    display: none;
+  }
+  .navbar:hover .links {
+    display: block;
+    margin-top: 1.2rem;
+    width: 100%;
+  }
+
+  .links ul {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.2rem;
+    width: 100%;
+  }
+
+  .links li {
+    width: 100%;
+    border-radius: 10px;
   }
 }
