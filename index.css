@@ -87,8 +87,14 @@ a {
   align-items: center;
 }
 
+.links li {
+  padding: 0.625rem 0.5rem;
+  transition: 0.3s ease-in-out;
+}
+
 .links li:hover {
   background-color: #e9bb24;
+  border-radius: 10px;
 }
 
 .top {
@@ -287,13 +293,20 @@ form {
   .logo {
     margin: 0;
   }
-  .links {
-    display: none;
+
+  .navbar .links {
+    overflow: hidden;
+    opacity: 0;
+    height: 0;
+    transition: height 0.2s ease-in-out;
   }
+
   .navbar:hover .links {
-    display: block;
+    /* display: block; */
     margin-top: 1.2rem;
     width: 100%;
+    opacity: 1;
+    height: auto;
   }
 
   .links ul {
@@ -306,5 +319,13 @@ form {
   .links li {
     width: 100%;
     border-radius: 10px;
+  }
+
+  iframe {
+    width: 100%;
+  }
+
+  .subscribe form {
+    width: 50%;
   }
 }

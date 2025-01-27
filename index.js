@@ -77,13 +77,13 @@ function setOpenOrClose() {
   const isOpen = hour >= openHour && hour <= closeHour;
 
   const setOpenMessage = `
-    <p>We're open from 12:00 to 22:00. Come visit us or order online</p>
-    <button class="btn">Order</button>`;
+      <p>We're open from 12:00 to 22:00. Come visit us or order online</p>
+      <button class="btn">Order</button>`;
 
   const setClosedMessage = `
-    <p>
-    We're happy to welcome you and take your order between ${openHour}:00 and ${closeHour}:00
-    </p>`;
+      <p>
+      We're happy to welcome you and take your order between ${openHour}:00 and ${closeHour}:00
+      </p>`;
 
   isOpen
     ? order.insertAdjacentHTML("beforeend", setOpenMessage)
