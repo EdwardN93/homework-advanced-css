@@ -45,9 +45,13 @@ const pizzaData = [
   },
 ];
 
+const modal = document.querySelector(".modal");
+
 window.addEventListener("load", function () {
   loadPizzas();
   setOpenOrClose();
+  selectPizza();
+  modalExit();
 });
 
 function loadPizzas() {
@@ -55,17 +59,81 @@ function loadPizzas() {
 
   pizzaData.forEach((el) => {
     const html = `
-        <li class="pizza ${el.soldOut ? "sold-out" : ""}">
-        <img src="${el.photoName}" alt="${el.photoName}" />
-        <div>
-        <h3>${el.name}</h3>
-        <p>${el.ingredients}</p>
-        <span>${el.soldOut ? "SOLD OUT" : el.price + "€"}</span>
-        </div>
-        </li>
-        
-        `;
+    <li class="pizza ${el.soldOut ? "sold-out" : ""} ${el.name
+      .split(" ")
+      .slice(-1)
+      .toString()}" data-name="${el.name}">
+      <img src="${el.photoName}" alt="${el.photoName}" />
+      <div>
+      <h3>${el.name}</h3>
+      <p>${el.ingredients}</p>
+      <span>${el.soldOut ? "SOLD OUT" : el.price + "€"}</span>
+      </div>
+      </li>
+      
+      `;
     menu.insertAdjacentHTML("beforeend", html);
+  });
+}
+
+function selectPizza() {
+  const pizzas = document.querySelectorAll(".pizza");
+  let currentActive = document.querySelector(".pizza.active");
+  // console.log(pizza);
+  let thanks = document.querySelector(".thanks-order");
+
+  pizzas.forEach((pizza) => {
+    pizza.addEventListener("click", () => {
+      // console.log(e.getAttribute("class").split(" ").slice(-1).toString());
+      if (pizza.classList.contains("sold-out")) {
+        return;
+      }
+
+      if (currentActive) currentActive.classList.remove("active");
+      pizza.classList.add("active");
+      currentActive = pizza;
+
+      thanks.innerHTML = getOrderedPizza(
+        pizza.getAttribute("data-name").split(" ").slice(-1).toString()
+      );
+
+      // console.log(pizza.getAttribute("class").split(" ").slice(1).toString());
+      // getOrderedPizza(
+      //   pizza.getAttribute("class").split(" ").slice(-1).toString()
+      // );
+    });
+  });
+}
+
+function getOrderedPizza(pizza) {
+  const orderBtn = document.querySelector(".btn");
+
+  orderBtn.addEventListener("click", () => {
+    modal.style.transform = "translate-y(0)";
+    modal.style.display = "block";
+    document.querySelector(".active").classList.remove("active");
+  });
+
+  let thanksOrd = pizzaData
+    .filter(function (e) {
+      return e.name.includes(pizza);
+    })
+    .map(function (e) {
+      if (e.soldOut) {
+        return "Oh No! Sold out! Chose another pizza";
+      } else {
+        return `Thank you for ordering our ${e.name}`;
+      }
+    })
+    .toString();
+
+  return thanksOrd;
+}
+
+function modalExit() {
+  const modalClose = document.querySelector(".close");
+  modalClose.addEventListener("click", function () {
+    if (modal.style.display === "block") modal.style.display = "none";
   });
 }
 
@@ -73,7 +141,7 @@ function setOpenOrClose() {
   const order = document.querySelector(".order");
   const hour = new Date().getHours();
   const openHour = 12;
-  const closeHour = 22;
+  const closeHour = 24;
   const isOpen = hour >= openHour && hour <= closeHour;
 
   const setOpenMessage = `
