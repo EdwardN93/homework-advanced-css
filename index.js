@@ -84,9 +84,9 @@ function selectPizza() {
 
   pizzas.forEach((pizza) => {
     pizza.addEventListener("click", () => {
-      if (pizza.classList.contains("sold-out")) {
-        return;
-      }
+      // if (pizza.classList.contains("sold-out")) {
+      //   return;
+      // }
 
       if (currentActive) currentActive.classList.remove("active");
       pizza.classList.add("active");
