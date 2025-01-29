@@ -73,7 +73,6 @@ function loadPizzas() {
       <span>${el.soldOut ? "SOLD OUT" : el.price + "€"}</span>
       </div>
       </li>
-      
       `;
     menu.insertAdjacentHTML("beforeend", html);
   });
@@ -81,12 +80,10 @@ function loadPizzas() {
 
 function selectPizza() {
   const pizzas = document.querySelectorAll(".pizza");
-  // console.log(pizza);
   let thanks = document.querySelector(".thanks-order");
 
   pizzas.forEach((pizza) => {
     pizza.addEventListener("click", () => {
-      // console.log(e.getAttribute("class").split(" ").slice(-1).toString());
       if (pizza.classList.contains("sold-out")) {
         return;
       }
@@ -104,15 +101,7 @@ function selectPizza() {
         thanks.innerHTML = getOrderedPizza(
           pizza.getAttribute("data-name").split(" ").slice(-1).toString()
         );
-        // order.pop();
       }
-
-      // console.log(pizza.getAttribute("class").split(" ").slice(1).toString());
-      // getOrderedPizza(
-      //   pizza.getAttribute("class").split(" ").slice(-1).toString()
-      // );
-
-      console.log(currentActive);
     });
   });
 }
@@ -153,8 +142,6 @@ function modalExit() {
   const modalClose = document.querySelector(".close");
   modalClose.addEventListener("click", function () {
     if (modal.style.display === "block") modal.style.display = "none";
-    currentActive = "";
-    console.log(currentActive + " line 144");
   });
 }
 
@@ -162,7 +149,7 @@ function setOpenOrClose() {
   const order = document.querySelector(".order");
   const hour = new Date().getHours();
   const openHour = 12;
-  const closeHour = 24;
+  const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
 
   const setOpenMessage = `
