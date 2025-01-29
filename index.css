@@ -14,7 +14,7 @@ html {
 }
 
 :target {
-  scroll-margin-top: 50px;
+  scroll-margin-top: 100px;
 }
 
 body {
@@ -298,7 +298,6 @@ form {
   position: fixed;
   z-index: 1;
   padding-top: 100px;
-  transform: translateY(-1);
   left: 0;
   top: 0;
   width: 100%;
@@ -331,6 +330,9 @@ form {
 }
 
 @media only screen and (max-width: 600px) {
+  :target {
+    scroll-margin-top: 200px;
+  }
   .pizzas {
     grid-template-columns: 1fr;
   }

@@ -46,6 +46,9 @@ const pizzaData = [
 ];
 
 const modal = document.querySelector(".modal");
+let currentActive = document.querySelector(".pizza.active");
+
+let order = [];
 
 window.addEventListener("load", function () {
   loadPizzas();
@@ -78,7 +81,6 @@ function loadPizzas() {
 
 function selectPizza() {
   const pizzas = document.querySelectorAll(".pizza");
-  let currentActive = document.querySelector(".pizza.active");
   // console.log(pizza);
   let thanks = document.querySelector(".thanks-order");
 
@@ -93,14 +95,24 @@ function selectPizza() {
       pizza.classList.add("active");
       currentActive = pizza;
 
-      thanks.innerHTML = getOrderedPizza(
+      order.push(
         pizza.getAttribute("data-name").split(" ").slice(-1).toString()
       );
+      console.log(order);
+      if (order.length > 0) {
+        order.pop(-1);
+        thanks.innerHTML = getOrderedPizza(
+          pizza.getAttribute("data-name").split(" ").slice(-1).toString()
+        );
+        // order.pop();
+      }
 
       // console.log(pizza.getAttribute("class").split(" ").slice(1).toString());
       // getOrderedPizza(
       //   pizza.getAttribute("class").split(" ").slice(-1).toString()
       // );
+
+      console.log(currentActive);
     });
   });
 }
@@ -109,9 +121,14 @@ function getOrderedPizza(pizza) {
   const orderBtn = document.querySelector(".btn");
 
   orderBtn.addEventListener("click", () => {
-    modal.style.transform = "translate-y(0)";
+    let check = document.querySelector(".pizza.active");
+
+    if (!check) {
+      return;
+    } else {
+      check.classList.remove("active");
+    }
     modal.style.display = "block";
-    document.querySelector(".active").classList.remove("active");
   });
 
   let thanksOrd = pizzaData
@@ -119,6 +136,9 @@ function getOrderedPizza(pizza) {
       return e.name.includes(pizza);
     })
     .map(function (e) {
+      if (!currentActive && order.length == 0) {
+        return;
+      }
       if (e.soldOut) {
         return "Oh No! Sold out! Chose another pizza";
       } else {
@@ -126,7 +146,6 @@ function getOrderedPizza(pizza) {
       }
     })
     .toString();
-
   return thanksOrd;
 }
 
@@ -134,6 +153,8 @@ function modalExit() {
   const modalClose = document.querySelector(".close");
   modalClose.addEventListener("click", function () {
     if (modal.style.display === "block") modal.style.display = "none";
+    currentActive = "";
+    console.log(currentActive + " line 144");
   });
 }
 
