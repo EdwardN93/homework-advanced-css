@@ -95,7 +95,7 @@ function selectPizza() {
       order.push(
         pizza.getAttribute("data-name").split(" ").slice(-1).toString()
       );
-      console.log(order);
+
       if (order.length > 0) {
         order.pop(-1);
         thanks.innerHTML = getOrderedPizza(
